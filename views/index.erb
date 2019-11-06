@@ -1,0 +1,32 @@
+<html>
+<title>Berbix Sample</title>
+<body>
+
+<h1>Hello, <%= @username %>!</h1>
+<p>(user ID: <%=@uid%>)</p>
+
+<p>Please click the button below to verify your ID with Berbix:</p>
+<button id="myButton">Verify Me</button>
+<div id="berbix-root" style="width:500px;"></div>
+
+<script src="https://sdk.berbix.com/latest/berbix-verify.js"></script>
+
+<script>
+  var handler = BerbixVerify.configure({
+    environment: 'production',
+    onComplete: function() {
+        alert('Berbix verification complete.  Click OK to see the results.');
+        window.location.href = "/after_id_check?username=<%= @username %>";
+    },
+  })
+
+  document.getElementById('myButton').addEventListener('click', function(e) {
+    handler.open({
+      clientToken: '<%= @transaction_tokens.client_token %>',
+      root: 'berbix-root'
+    });
+  });
+</script>
+
+</body>
+</html>

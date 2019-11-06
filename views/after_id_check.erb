@@ -1,0 +1,23 @@
+<html>
+<title>Berbix Sample</title>
+<body>
+
+<h1>Hello, <%= params[:username] %></h1>
+
+<p>Name on submitted ID: <%= @name_on_id %></p>
+
+<% if @name_match %>
+  <p class="success">Names match!</p>
+<% else %>
+  <p class="fail">Names do not match!</p>
+<% end %>
+
+<hr />
+<h2>Raw Response Object</h2>
+
+<pre>
+<%= @data.to_yaml %>
+</pre>
+
+</body>
+</html>
