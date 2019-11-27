@@ -31,7 +31,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  berbix (>= 0.0.5)
+  berbix (= 0.0.6)
   namey (>= 0.0.12)
   sinatra (= 2.0.7)
   sinatra-contrib (= 2.0.7)
