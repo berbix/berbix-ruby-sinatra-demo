@@ -9,7 +9,7 @@ GEM
     namey (0.0.12)
       sequel (~> 4.48)
       sqlite3
-    rack (2.1.1)
+    rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
     ruby2_keywords (0.0.2)
