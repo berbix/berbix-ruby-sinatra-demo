@@ -14,17 +14,17 @@ git clone git@github.com:berbix/berbix-ruby-sinatra-demo.git
 
 - [ ] Login to the Berbix console: https://dashboard.berbix.com/login
 
-- [ ] Generate API keys following these instructions: https://docs.berbix.com/docs/settings#section-api-keys
-
 - [ ] Enable "Test" mode with the slider in the top right hand corner of the Berbix Dashboard.
 
 - [ ] Whitelist the development domain for this app.  Go to Settings (the gear icon in the top right corner of the Berbix Dashboard) —> Domains —> Add Domain —> “http://localhost:4567”
 
-- [ ] Copy your template key from the "Templates" tab in the Berbix Dashboard into the berbix_config.yaml file.
-
 - [ ] Add your last name (as on your ID that you'll be testing with) to your list of Test IDs.  Go to Settings —> Test IDs -> Add Test ID.
 
 - [ ] Rename `berbix_config.yaml.example` to `berbix_config.yaml` and update it with your credentials.
+
+- [ ] Generate API keys following these instructions: https://docs.berbix.com/docs/settings#section-api-keys
+
+- [ ] Copy your template key from the "Templates" tab in the Berbix Dashboard into the berbix_config.yaml file.
 
 - [ ] To start the server and run this app:
 ```
