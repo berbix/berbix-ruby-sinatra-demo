@@ -100,7 +100,6 @@ get '/' do
 
   client = Berbix::Client.new(
     api_secret: berbix_config['client_secret'],
-    environment: :production,
   )
   
   @transaction_tokens = client.create_transaction(
@@ -134,7 +133,6 @@ Now, let's update the view file `index.erb` to load the Berbix Javascript SDK:
 
 <script>
   var handler = BerbixVerify.configure({
-    environment: 'production',
     onComplete: function() {
         alert('Berbix verification complete.  Click OK to see the results.');
         window.location.href = "/after_id_check";
@@ -165,7 +163,6 @@ get '/after_id_check' do
 
   client = Berbix::Client.new(
     client_secret: berbix_config['client_secret'],
-    environment: :production
   )
 
   transaction_tokens = Berbix::Tokens.from_refresh(@refresh_token)

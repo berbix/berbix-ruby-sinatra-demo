@@ -15,15 +15,11 @@ get '/' do
   @generator = Namey::Generator.new
   @username = @generator.name(:common)
   
-  if params[:uid]
-    @uid = params[:uid].to_i
-  else
-    @uid = 123
-  end
+  @uid = 123
+
 
   client = Berbix::Client.new(
     client_secret: berbix_config['client_secret'],
-    environment: :production
   )
 
   # Check if refresh token exists for given UID
@@ -49,11 +45,11 @@ get '/' do
 end
 
 get '/after_id_check' do
+  @uid = 123
   @refresh_token = File.open('./refresh_token.txt', &:readline).gsub(/\s+/, "")
 
   client = Berbix::Client.new(
     client_secret: berbix_config['client_secret'],
-    environment: :production
   )
 
   transaction_tokens = Berbix::Tokens.from_refresh(@refresh_token)
