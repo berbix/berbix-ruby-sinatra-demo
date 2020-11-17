@@ -16,7 +16,7 @@ get '/' do
   @username = @generator.name(:common)
   
   if params[:uid]
-    @uid = params[:uid]
+    @uid = params[:uid].to_i
   else
     @uid = 123
   end
@@ -27,9 +27,9 @@ get '/' do
   )
 
   # Check if refresh token exists for given UID
-  if File.file?("#{@uid}_refresh_token.txt")
+  if File.file?("#{@uid.to_i}_refresh_token.txt")
     # read the refresh token from disk
-    @refresh_token = File.open("#{@uid}_refresh_token.txt").read
+    @refresh_token = File.open("#{@uid.to_i}_refresh_token.txt").read
     
     begin
       @transaction_tokens = Berbix::Tokens.from_refresh(@refresh_token)
@@ -45,7 +45,7 @@ get '/' do
       template_key: berbix_config['template_key'], # Template key for this transaction
       hosted_options: {}
     )
-    File.open("#{@uid}_refresh_token.txt", "w") do |file|
+    File.open("#{@uid.to_i}_refresh_token.txt", "w") do |file|
       file.write(@transaction_tokens.refresh_token)
     end
   end
