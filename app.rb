@@ -15,15 +15,11 @@ get '/' do
   @generator = Namey::Generator.new
   @username = @generator.name(:common)
   
-  if params[:uid]
-    @uid = params[:uid].to_i
-  else
-    @uid = 123
-  end
+  @uid = 123
 
+  @status = "unknown"
   client = Berbix::Client.new(
     client_secret: berbix_config['client_secret'],
-    environment: :production
   )
 
   # Check if refresh token exists for given UID
@@ -31,7 +27,13 @@ get '/' do
     # read the refresh token from disk
     @refresh_token = File.open("#{@uid.to_i}_refresh_token.txt").read
     @transaction_tokens = Berbix::Tokens.from_refresh(@refresh_token)
-    @transaction_tokens = client.refresh_tokens(@transaction_tokens) # needed to force library to refresh the refresh token
+    @transaction_data = client.fetch_transaction(@transaction_tokens)
+    if @transaction_data && !@transaction_data["action"].nil?
+      logger.info @transaction_data["action"]
+      @status = "completed"
+    else
+      @status = "incomplete"
+    end
   end
 
   if @transaction_tokens.nil?
@@ -43,17 +45,19 @@ get '/' do
     File.open("#{@uid.to_i}_refresh_token.txt", "w") do |file|
       file.write(@transaction_tokens.refresh_token)
     end
+    @status = "new"
   end
 
   erb :index
 end
 
 get '/after_id_check' do
-  @refresh_token = File.open('./refresh_token.txt', &:readline).gsub(/\s+/, "")
+  @uid = 123
+
+  @refresh_token = File.open("#{@uid.to_i}_refresh_token.txt").read
 
   client = Berbix::Client.new(
     client_secret: berbix_config['client_secret'],
-    environment: :production
   )
 
   transaction_tokens = Berbix::Tokens.from_refresh(@refresh_token)
