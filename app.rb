@@ -30,15 +30,10 @@ get '/' do
   if File.file?("#{@uid.to_i}_refresh_token.txt")
     # read the refresh token from disk
     @refresh_token = File.open("#{@uid.to_i}_refresh_token.txt").read
-    
-    begin
-      @transaction_tokens = Berbix::Tokens.from_refresh(@refresh_token)
-      @data = client.fetch_transaction(@transaction_tokens) # needed to force library to refresh the refresh token
-    rescue => exception
-      @transaction_tokens = nil
-    end
-  end    
-    
+    @transaction_tokens = Berbix::Tokens.from_refresh(@refresh_token)
+    @transaction_tokens = client.refresh_tokens(@transaction_tokens) # needed to force library to refresh the refresh token
+  end
+
   if @transaction_tokens.nil?
     @transaction_tokens = client.create_transaction(
       customer_uid: @uid, # ID for the user in client database
