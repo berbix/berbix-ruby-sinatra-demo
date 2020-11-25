@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     backports (3.18.1)
-    berbix (0.0.10)
+    berbix (0.0.11)
     multi_json (1.15.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -33,7 +33,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  berbix (= 0.0.10)
+  berbix (= 0.0.11)
   namey (>= 0.0.12)
   sinatra (= 2.0.8.1)
   sinatra-contrib (= 2.0.8.1)
