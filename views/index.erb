@@ -13,7 +13,6 @@
 
 <script>
   var handler = BerbixVerify.configure({
-    environment: 'production',
     onComplete: function() {
         alert('Berbix verification complete.  Click OK to see the results.');
         window.location.href = "/after_id_check?username=<%= @username %>";
