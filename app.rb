@@ -2,7 +2,6 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'yaml'
 require 'berbix'
-require 'namey'
 require 'json'
 require 'sinatra/custom_logger'
 require 'logger'
@@ -12,8 +11,7 @@ set :logger, Logger.new(STDOUT)
 berbix_config = YAML.load(File.read('berbix_config.yaml'))
 
 get '/' do
-  @generator = Namey::Generator.new
-  @username = @generator.name(:common)
+  @username = "Jane Doe"
   
   @uid = 123
 

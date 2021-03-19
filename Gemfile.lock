@@ -4,15 +4,11 @@ GEM
     berbix (0.0.11)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
-    namey (0.0.12)
-      sequel (~> 4.48)
-      sqlite3
     pg (1.2.3)
     rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
     ruby2_keywords (0.0.4)
-    sequel (4.49.0)
     sinatra (2.0.8.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -26,7 +22,6 @@ PLATFORMS
 
 DEPENDENCIES
   berbix (= 0.0.11)
-  namey (>= 0.0.12)
   pg
   sinatra (= 2.0.8.1)
   sqlite3
