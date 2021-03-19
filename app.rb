@@ -8,13 +8,19 @@ require 'logger'
 
 set :logger, Logger.new(STDOUT)
 
-berbix_config = YAML.load(File.read('berbix_config.yaml'))
+if File.file?('berbix_config.yaml')
+  berbix_config = YAML.load(File.read('berbix_config.yaml'))
+else
+  berbix_config = {
+    'template_key' => process.ENV.BERBIX_TEMPLATE,
+    'client_secret' => process.ENV.BERBIX_SECRET
+  }
+end
 
 get '/' do
   @username = "Jane Doe"
   
   @uid = 123
-
 
   client = Berbix::Client.new(
     client_secret: berbix_config['client_secret'],
@@ -33,9 +39,9 @@ get '/' do
       customer_uid: @uid, # ID for the user in client database
       template_key: berbix_config['template_key'], # Template key for this transaction
     )
-    File.open("#{@uid.to_i}_refresh_token.txt", "w") do |file|
-      file.write(@transaction_tokens.refresh_token)
-    end
+    # File.open("#{@uid.to_i}_refresh_token.txt", "w") do |file|
+    #   file.write(@transaction_tokens.refresh_token)
+    # end
   end
 
   erb :index
