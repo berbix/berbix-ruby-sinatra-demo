@@ -12,8 +12,8 @@ if File.file?('berbix_config.yaml')
   berbix_config = YAML.load(File.read('berbix_config.yaml'))
 else
   berbix_config = {
-    'template_key' => process.env.BERBIX_TEMPLATE,
-    'client_secret' => process.env.BERBIX_SECRET
+    'template_key' => ENV['BERBIX_TEMPLATE'],
+    'client_secret' => ENV['BERBIX_SECRET']
   }
 end
 
